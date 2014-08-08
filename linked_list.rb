@@ -28,8 +28,8 @@ class List
     if current_node.content == value
       @head = current_node.next_node
     else
-      while current_node != nil && current_node.next != nil && current_node.next_node.content != nil
-        current_node = current_node.next
+      while current_node != nil && current_node.next_node != nil && current_node.next_node.content != value
+        current_node = current_node.next_node
       end
     end
     if current_node != nil && current_node.next_node != nil
@@ -67,4 +67,5 @@ list = List.new(Node.new(1))
 list.add_node(2)
 list.add_node(3)
 list.display
-
+list.remove_node(2)
+list.display
