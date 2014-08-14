@@ -33,7 +33,7 @@ class List
       end
     end
     if current_node != nil && current_node.next_node != nil
-      current_node.next_node =current_node.next_node.next_node
+      current_node.next_node = current_node.next_node.next_node
     end
   end
 
@@ -62,10 +62,12 @@ class List
 
 end
 
-
-list = List.new(Node.new(1))
+node_1 = Node.new(1)
+list = List.new(node_1)
 list.add_node(2)
 list.add_node(3)
+list.add_node(4)
 list.display
 list.remove_node(2)
 list.display
+p node_1.next_node
