@@ -21,7 +21,8 @@ class DoubleLinkedList
     while current_node.next_node != nil
       current_node = current_node.next_node
     end
-    current_node.next_node = Node.new(value,nil)
+    current_node.next_node = Node.new(value)
+    current_node.next_node.prev_node = current_node
   end
 
   def remove_node(value)
@@ -68,5 +69,15 @@ class DoubleLinkedList
   def add_before_value(value)
 
   end
-
 end
+
+node_1 = Node.new(1)
+double_linked_list = DoubleLinkedList.new(node_1)
+double_linked_list.add_node(2)
+double_linked_list.add_node(3)
+double_linked_list.add_node(4)
+double_linked_list.display
+p double_linked_list.head.next_node.next_node.next_node.prev_node.content == 3
+p double_linked_list.head.next_node.next_node.next_node.prev_node.prev_node.content == 2
+
+
