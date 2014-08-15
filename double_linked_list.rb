@@ -36,6 +36,7 @@ class DoubleLinkedList
     end
     if current_node != nil && current_node.next_node != nil
       current_node.next_node = current_node.next_node.next_node
+      current_node.next_node.prev_node = current_node
     end
   end
 
@@ -79,5 +80,8 @@ double_linked_list.add_node(4)
 double_linked_list.display
 p double_linked_list.head.next_node.next_node.next_node.prev_node.content == 3
 p double_linked_list.head.next_node.next_node.next_node.prev_node.prev_node.content == 2
-
+double_linked_list.remove_node(3)
+p double_linked_list.head.next_node.next_node.content == 4
+p double_linked_list.head.next_node.next_node.prev_node.content == 2
+p double_linked_list.head.next_node.next_node.prev_node.prev_node.content == 1
 
