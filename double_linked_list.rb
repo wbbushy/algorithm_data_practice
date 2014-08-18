@@ -75,9 +75,18 @@ class DoubleLinkedList
     current_node.next_node = new_node
   end
 
-  def add_before_value(value)
-
+  def add_before_value(value, content)
+    current_node = @head
+    until current_node.content == value && current_node.next_node != nil
+      current_node = current_node.next_node
+    end
+    new_node = Node.new(content)
+    new_node.next_node = current_node
+    new_node.prev_node = current_node.prev_node
+    current_node.prev_node.next_node = new_node
+    current_node.prev_node = new_node
   end
+
 end
 
 node_1 = Node.new(1)
@@ -97,3 +106,21 @@ p "------------------------------"
 double_linked_list.display
 p double_linked_list.head.next_node.next_node.next_node.content == 4
 p double_linked_list.head.next_node.next_node.next_node.prev_node.prev_node.prev_node.content == 1
+p "-------------------------------"
+double_linked_list.remove_node(2)
+double_linked_list.display
+double_linked_list.add_before_value(3, 2)
+double_linked_list.display
+p double_linked_list.head.next_node.next_node.next_node.content == 4
+p double_linked_list.head.next_node.next_node.next_node.prev_node.prev_node.prev_node.content == 1
+
+
+
+
+
+
+
+
+
+
+
