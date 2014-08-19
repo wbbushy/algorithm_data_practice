@@ -11,9 +11,8 @@ end
 class CircularLinkedList
   attr_accessor :head
 
-  def initialize(head, tail = nil)
+  def initialize(head)
     @head = head
-    @tail = tail
   end
 
   def add_after_value(value, content)
@@ -40,6 +39,14 @@ class CircularLinkedList
     end
   end
 
+  def join_circle
+    current_node = @head
+    until current_node.next_node == nil
+      current_node = current_node.next_node
+    end
+    current_node.next_node = @head
+  end
+
 end
 
 node_1 = Node.new(1)
@@ -49,3 +56,9 @@ list.add_after_value(2, 3)
 p list.head.content == 1
 p list.head.next_node.content == 2
 p list.head.next_node.next_node.content == 3
+list.join_circle
+p "----------------------------------------------"
+p list.head.content
+p list.head.next_node.content
+p list.head.next_node.next_node.content
+p list.head.next_node.next_node.next_node.content
