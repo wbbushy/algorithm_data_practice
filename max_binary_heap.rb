@@ -7,12 +7,10 @@ class MaxBinaryHeap
   # takes a value and moves it up the heap by continually swapping it with its
   # parent so long as its value is more than its parent's value
   def sift_up(index)
-    while index != 0
-      parent = (index - 1) / 2
-      if @heap[parent] < @heap[index]
-        swap(index, parent)
-      end
-      index = parent
+    parent = (index - 1) / 2
+    if parent >= 0 and @heap[parent] < @heap[index]
+      @heap[parent], @heap[index] = @heap[index], @heap[parent]
+      sift_up(parent)
     end
   end
 
@@ -20,17 +18,26 @@ class MaxBinaryHeap
   # the larger of the two children if the value is less than both of the
   # childrens' values
   def sift_down(index)
-    while true
-      left = (2 * index) + 1
-      right = (2 * index) + 2
-      child = compare(left, right) ? left : right
-      if !compare(index, child)
-        swap!(index, child)
-        index = child
-      else
-        break
-      end
+    child = (i * 2) + 1
+    return if child >= @heap.length
+    child += 1 if child + 1 < @heap.length and @heap[child] > @heap[child+1]
+    if @heap[index] > @heap[child]
+      @heap[child], @heap[index] = @heap[index], @heap[child]
+      sift_down(child)
     end
   end
 
+
+  def heapify(data_array)
+    data_array.each do |element|
+      @heap << element
+      sift_up(@heap.length - 1)
+    end
+  end
 end
+
+data = [100, 2, 7, 17 ,3 ,25, 1, 36, 19]
+new_heap = MaxBinaryHeap.new
+new_heap.heapify(data)
+p new_heap
+
